@@ -4,9 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+//#include "TankBarrel.h"
 #include "TankAimingComponent.generated.h"
 
+//forward decleration
+class UTankBarrel; 
 
+// Hold parametes for barrel
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -25,9 +29,9 @@ public:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 private:
-	UStaticMeshComponent* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr;
 		
 };
