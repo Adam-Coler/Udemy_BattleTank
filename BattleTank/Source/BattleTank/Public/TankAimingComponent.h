@@ -9,6 +9,7 @@
 
 //forward decleration
 class UTankBarrel; 
+class UTankTurrent;
 
 // Hold parametes for barrel
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -31,7 +32,10 @@ public:
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
+	void SetTurrentReference(UTankTurrent* TurrentToSet);
+
 private:
 	UTankBarrel* Barrel = nullptr;
+	UTankTurrent* Turrent = nullptr;
 		
 };
