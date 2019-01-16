@@ -41,4 +41,7 @@ void ATank::AimAt(FVector HitLocation) {
 
 }
 
+void ATank::Fire() {
+	UE_LOG(LogTemp, Warning, TEXT("FIRE YAR"));
+}
 
