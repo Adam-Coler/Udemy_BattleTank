@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Runtime/Engine/Classes/GameFramework/ProjectileMovementComponent.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
@@ -23,4 +24,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void LaunchPRojectile(float Speed);
+
+private:
+	UProjectileMovementComponent* ProjectileMovement = nullptr;
 };
