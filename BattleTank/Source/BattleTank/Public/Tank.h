@@ -53,4 +53,9 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint; //TODO find sensable default
 
 	UTankBarrel* Barrel = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = ReloadTimeInSeconds * -1;
 };
