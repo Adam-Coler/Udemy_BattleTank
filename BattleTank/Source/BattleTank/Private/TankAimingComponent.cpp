@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurrent.h"
+#include "Projectile.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
@@ -35,7 +36,7 @@ void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurrent * 
 	Turrent = TurrentToSet;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	auto OurTankName = GetOwner()->GetName();
 	auto BarrelLocation = Barrel->GetComponentLocation().ToString();
@@ -68,5 +69,23 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 
 
 }
+
+void UTankAimingComponent::Fire() {
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (!isReloaded) { return; }
+	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+	
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation("Projectile"),
+		Barrel->GetSocketRotation("Projectile"));
+
+	Projectile->LaunchPRojectile(LaunchSpeed);
+	LastFireTime = FPlatformTime::Seconds();
+
+}
+
+//TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+
 
 //UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation);
