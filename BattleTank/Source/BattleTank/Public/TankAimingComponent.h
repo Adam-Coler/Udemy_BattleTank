@@ -36,13 +36,16 @@ protected:
 
 public:	
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel *BarrelToSet, UTankTurrent *TurrentToSet);
+
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 	void MoveBarrelTowards(FVector AimDirection);
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	//void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	void SetTurrentReference(UTankTurrent* TurrentToSet);
+	//void SetTurrentReference(UTankTurrent* TurrentToSet);
 
 private:
 	UTankBarrel* Barrel = nullptr;
