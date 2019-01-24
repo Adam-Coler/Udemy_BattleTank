@@ -37,6 +37,8 @@ protected:
 
 public:	
 
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel *BarrelToSet, UTankTurrent *TurrentToSet);
 
@@ -47,6 +49,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
+
 	//void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	//void SetTurrentReference(UTankTurrent* TurrentToSet);
@@ -55,6 +58,9 @@ private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurrent* Turrent = nullptr;
 
+	bool IsBarrelMoving();
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 4000; //TODO find sensable default
@@ -66,5 +72,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
-	double LastFireTime = ReloadTimeInSeconds * -1;
+	double LastFireTime = ReloadTimeInSeconds;
+
+	FVector AimDirection;
 };
